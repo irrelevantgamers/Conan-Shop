@@ -1,6 +1,7 @@
 # Conan-Shop
 SQLite version of conan shop
-Conan Discord Shop
+Shop keeps track of current players on server and awards them with coin(currency) to spend in the shop. This is given out every 30 minutes by default.
+Set the starting cash and how much each player gets on interval in config.ini
 
 Getting Started
 
