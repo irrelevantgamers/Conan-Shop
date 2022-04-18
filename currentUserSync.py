@@ -98,7 +98,7 @@ def syncPlayers(serverid):
         players = server.players()
         server
     userlist = []
-    print("{player_count}/{max_players} {server_name}".format(**info))
+    #print("{player_count}/{max_players} {server_name}".format(**info))
     for player in sorted(players["players"],key=lambda p: p["score"], reverse=True):
         userlist.append("{name}".format(**player))
 

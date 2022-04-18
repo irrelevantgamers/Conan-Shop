@@ -13,7 +13,7 @@ if not opts.server:
 Server = opts.server
 
 while True:
-	print("Chat Log Watch Dog has started watching chat log")
+	print(f"Chat Log Watch Dog has started for {Server}")
 	p = Popen(['python', 'chatlog.py', '--server', f'{Server}'], stdout=PIPE, stderr=PIPE, shell=True)
 	p.wait()
 	stdout, stderr = p.communicate()
