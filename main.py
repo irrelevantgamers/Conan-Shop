@@ -19,6 +19,10 @@ config.read("config.ini")
 file_path_shop_db = config["SHOP"]["Database"]
 #Discord channel for posting shop item list
 shop_discord_channel_id = config["DISCORD"]["shopListChannelId"]
+paycheck_interval = int(config["SHOP"]["PayCheckInterval"])
+if paycheck_interval == None:
+    paycheck_interval = 30
+paycheck_interval_seconds = paycheck_interval * 60
 #Discord api key needed to run the bot
 discord_api_key = config["DISCORD"]["APIKEY"]
 timezone = int(config["TIME"]["Timezone"])
@@ -64,7 +68,7 @@ async def updateWalletforCurrentUsers():
         ServerIDs = shopcur.fetchall()
         if ServerIDs != None:
             p = subprocess.Popen(['python.exe', 'updateWalletforCurrentUsers.py'],shell=True)
-        await asyncio.sleep(1800)  # task runs every 30 min
+        await asyncio.sleep(paycheck_interval_seconds)  # task runs every 30 min by default, change paycheck_interval in config.ini to set how often this runs in minutes
 
 async def updateShopList():
     while True:
