@@ -134,7 +134,6 @@ def syncPlayers(serverid):
                 if player != "":
                     #get player x and player y if dedicated server
                     if dedicated == 'True':
-                        print("dedicated is true")
                         gameCon = sqlite3.connect(file_path_db)
                         gameCur = gameCon.cursor()
                         gameCur.execute("SELECT a.id, a.user, a.online, c.char_name, c.id, p.x, p.y FROM account as a INNER JOIN characters as c ON a.id = c.playerid INNER JOIN actor_position as p ON c.id = p.id WHERE a.online =1 AND a.user =?", (platformid, ))

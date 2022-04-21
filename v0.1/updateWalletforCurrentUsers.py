@@ -3,7 +3,7 @@ import sys
 import sqlite3
 import configparser
 import subprocess
-import datetime
+
 config = configparser.ConfigParser()
 config.read("config.ini")
 file_path_shop_db = config["SHOP"]["Database"]
@@ -11,7 +11,7 @@ StartingCash = config["SHOP"]["StartingCash"]
 PayCheck = int(config["SHOP"]["PayCheck"])
 
 def updateWallets():
-    now = datetime.datetime.now()
+    
     #sync users
     p = subprocess.call(['python.exe', "currentUserSync.py"], stdout=sys.stdout)
     # Connect to SQLite shop DB Platform
@@ -31,7 +31,7 @@ def updateWallets():
             for user in users:
                 #add user to mariadb account if it doesn't exist
                 try:
-                    shopCursor.execute("INSERT INTO accounts (conanplayer, conanuserid, conanplatformid, walletBalance, steamPlatformId, lastUpdated) VALUES (?,?,?,?,?,?)", (user[0], user[1], user[2],StartingCash,user[3], now))
+                    shopCursor.execute("INSERT INTO accounts (conanplayer, conanuserid, conanplatformid, walletBalance, steamPlatformId) VALUES (?,?,?,?,?)", (user[0], user[1], user[2],StartingCash,user[3]))
                     shopCon.commit()
                 except Exception as e:
 
@@ -42,7 +42,7 @@ def updateWallets():
                         walletBalance = walletDetails[0]
                         multiplier = walletDetails[1]
                         newBalance = walletBalance + (PayCheck * multiplier)
-                        shopCursor.execute("UPDATE accounts SET walletBalance=?, steamPlatformId=?, conanplayer=?, lastUpdated=? WHERE conanplatformid = ?", (newBalance, user[3], user[0], now, user[2]))
+                        shopCursor.execute("UPDATE accounts SET walletBalance=?, steamPlatformId=?, conanplayer=? WHERE conanplatformid = ?", (newBalance, user[3], user[0], user[2]))
                         shopCon.commit()
                     else:
                         print(f"failed to insert {e}")
