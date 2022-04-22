@@ -77,9 +77,13 @@ Bot Commands
 
 •	!register – This command is used for players to register their discord id to their conan account. Once a player sends the register command a unique code is generated and sent to the player. The code is then entered into game chat to complete the registration. If you are not running a dedicated server or the bot doesn’t have access to game.db and conansandbox.log in real time this command will not work
  
-•	!coin – Checks the players account balance
+•	!balance – Checks the players account balance
  
 •	!buy – Players use !buy followed by the item ID displayed in the shop channel you created to purchase and item. Example !buy 18
+
+•	!refund – refunds the order if it is eligible
  
 •	!gift – Players can gift coin to eachother using discord mentions !gift followed by @discordID#0000 1000 would gift the other player 1000 coin.
+
+
  
