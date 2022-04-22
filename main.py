@@ -86,7 +86,7 @@ async def updateShopList():
                 cat = category[0]
                 embedvar = discord.Embed(title=cat)
                 embedvar.set_footer(text="To buy an item go to purchasing and use !buy followed by the item ID. Example !buy 1 ")
-                shopCur.execute(f"SELECT * FROM shop_items WHERE enabled = 1 AND category = '{cat}' ORDER BY id desc")
+                shopCur.execute(f"SELECT * FROM shop_items WHERE enabled = 1 AND category = '{cat}' ORDER BY id ASC")
                 shop_items = shopCur.fetchall()
 
 
