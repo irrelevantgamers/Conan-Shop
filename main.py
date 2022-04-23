@@ -703,6 +703,12 @@ async def orderStatusWatcher():
         shopCon.close()
         await asyncio.sleep(1)
 
+async def currentUserSync():
+    while True:
+        #sync current users every 5 min by default users
+        p = subprocess.call(['python.exe', "currentUserSync.py"], stdout=sys.stdout)
+        await asyncio.sleep(300)
+
 @client.event
 async def on_ready():
     print('We have logged in as {0.user}'.format(client))
@@ -713,7 +719,7 @@ async def on_ready():
     client.loop.create_task(updateShopList())
     client.loop.create_task(processOrderLoop())
     client.loop.create_task(orderStatusWatcher())
-    
+    client.loop.create_task(currentUserSync())
 
 @client.event
 async def on_message(message):
