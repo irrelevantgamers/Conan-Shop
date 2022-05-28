@@ -19,7 +19,7 @@ def syncPlayers(serverid):
     serverInfo = shopCur.fetchone()
     if serverInfo != None:
         serverName = serverInfo[0]
-        dedicated = bool(serverInfo[1])
+        dedicated = serverInfo[1]
         rcon_host = serverInfo[2]
         rcon_port = serverInfo[3]
         rcon_pass = serverInfo[4]

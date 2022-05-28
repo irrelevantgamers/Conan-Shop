@@ -539,15 +539,20 @@ async def processOrderLoop():
                         print(f"Processing {order_number}: Current order_processing_id {order_id}: Item ID {itemid}")
                         
                         #sync users
-                        p = subprocess.Popen(['python.exe', "currentUserSync.py"], stdout=PIPE)
-                        p.wait()
-                        result = p.communicate()
-                        #print(result)
-                        if "'playerlist' referenced before assignment" in str(result):
-                            #print("out of karma")
-                            outOfKarma = 1
-                        else:
+                        try:
+                            p = subprocess.Popen(['python.exe', "currentUserSync.py"], stdout=PIPE)
+                            p.wait()
+                            result = p.communicate()
+                            #print(result)
+                            if "'playerlist' referenced before assignment" in str(result):
+                                #print("out of karma")
+                                outOfKarma = 1
+                            else:
+                                outOfKarma = 0
+                        except Exception as e:
+                            print(f"User sync failed, continueing anyway. Error {e}")
                             outOfKarma = 0
+                            pass
 
                         userFound = 0
                         rconSuccess = 0
